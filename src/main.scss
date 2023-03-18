@@ -6,14 +6,40 @@ $font-color: #aaa;
 $box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.6);
 
 $limit: 10;
-
 $unit: 8px;
 
-*{
+//Generalmente vamos a usar una funcion cuando queremos hacer operaciones matematicas para regresar un valor
+@function size($value) {
+    @return $value * $unit;
+}
+
+@mixin reset-pm {
     padding: 0;
     margin: 0;
+}
+
+@mixin btn($background-color, $color, $bold){
+    background-color: $background-color;
+    color: $color;
+    border-radius: 50px;
+    padding: 20px 3px;
+    text-align: center;
+    display: flex;
+    align-items:  center;
+    justify-content: space-around;
+
+    @if($bold == "true"){
+        font-weight: bolder;
+    };
+
+};
+
+
+*{
+    @include reset-pm;
     box-sizing: border-box;
 }
+
 
 body{
     background-color: $primary-color;
@@ -25,3 +51,38 @@ a{
     text-decoration: none;
 }
 
+h2{
+    font-weight: bolder;
+    font-size: size(6);
+}
+
+h3{
+    font-weight: lighter;
+    font-size: size(3);
+}
+
+//Aqui no pongo variable porque no quiero que el background color cambie, el del container
+.container{
+    background-color: white;
+    margin: 100px auto;//los margenes izquierdo y derecho se ajustan automaticamente para centrar el elemento dentro del contenedor
+    width: 1280px;
+    padding: 50px;
+    box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
+    background-image: url(../bg.jpg);
+    background-size: 100% 100%;
+}
+
+ul {
+    @include reset-pm;
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    li{
+        a{
+            @include btn($background-color: $primary-color,
+                          $color:$secondary-color, 
+                          $bold: 'true');
+            
+        }
+    }
+}
