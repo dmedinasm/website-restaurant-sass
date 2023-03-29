@@ -1,0 +1,26 @@
+@use "variables";
+@mixin btn($background-color, $color, $bold){
+    background-color: $background-color;
+    color: $color;
+    border-radius: 50px;
+    padding: 20px 30px;
+    text-align: center;
+    display: flex;
+    align-items:  center;
+    justify-content: space-around;
+
+    @if($bold == "true"){
+        font-weight: bolder;
+    };
+
+};
+
+//Aqui se van a afectar todos los botones que tengan al mismo nivel btn-cta
+.btn{
+    &.btn-cta{
+        @include btn(variables.$primary-color, variables.$secondary-color, 'true');
+        &:hover{
+            @include btn(variables.$secondary-color, variables.$terciary-color, 'true');
+        }
+    }
+}
